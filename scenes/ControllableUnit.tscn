@@ -9,6 +9,7 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l0o1w"]
 
 [node name="ControllableUnit" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_w44ah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
