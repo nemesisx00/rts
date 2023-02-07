@@ -8,11 +8,14 @@ namespace Rts.Nodes
 		private sealed class NodePaths
 		{
 			public const string SelectedOutline = "%SelectedOutline";
+			public const string Sprite = "%Sprite";
 			public const string Timer = "%Timer";
 		}
 		
 		[Export]
 		public string UnitName { get; set; }
+		[Export]
+		public Texture2D Sprite { get; set; }
 		[Export(PropertyHint.Range, "0,10,or_greater")]
 		public uint MoveSpeed { get; set; } = 2;
 		[Export]
@@ -34,9 +37,7 @@ namespace Rts.Nodes
 				MoveAndSlide();
 				
 				if(timer.IsStopped() && GetSlideCollisionCount() > 0)
-				{
 					timer.Start();
-				}
 			}
 		}
 		
@@ -44,6 +45,8 @@ namespace Rts.Nodes
 		{
 			targetPosition = Position;
 			outline = GetNode<Sprite2D>(NodePaths.SelectedOutline);
+			
+			GetNode<Sprite2D>(NodePaths.Sprite).Texture = Sprite;
 			
 			timer = GetNode<Timer>(NodePaths.Timer);
 			timer.WaitTime = StruggleTime;

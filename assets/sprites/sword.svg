@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64" fill="transparent" stroke="#000000">
+	<path fill="#301000" stroke="#301000" d="M32,62 C32,62 33,62 33,60 L33,48 L31,48 L31,60 C31,60 31,62 32,62" />
+	<path fill="#EEEEEE" stroke="#CCCCCC" stroke-width="0.5" d="M34,48 L34,44 L33,2 L32,1 L31,2 L30,44 L30,48" />
+	<path stroke="#DDDDDD" stroke-width="0.25" d="M32,48 L32,1.35" />
+	<path fill="#CCCCCC" stroke="#AAAAAA" stroke-width="0.5" d="M34,48 L38,48 L39,47 L38,46 L26,46 L25,47 L26,48 z" />
+</svg>
