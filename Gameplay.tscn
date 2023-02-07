@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://4k6bvhxi46iq"]
+[gd_scene load_steps=3 format=3 uid="uid://4k6bvhxi46iq"]
 
 [ext_resource type="Script" path="res://nodes/Gameplay.cs" id="1_tltnx"]
+[ext_resource type="PackedScene" uid="uid://caf61qelcn2s8" path="res://ControllableUnit.tscn" id="2_c0u10"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_tltnx")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 485.0
+offset_top = 43.0
+offset_right = 570.0
+offset_bottom = 69.0
 text = "GAMEPLAY"
+
+[node name="ControllableUnit" parent="." instance=ExtResource("2_c0u10")]
+position = Vector2(491, 186)
+UnitName = "Tazorface"

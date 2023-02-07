@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://caf61qelcn2s8"]
+
+[ext_resource type="Script" path="res://nodes/ControllableUnit.cs" id="1_8lvso"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_puwpv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_khkxi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l0o1w"]
+
+[node name="ControllableUnit" type="CharacterBody2D"]
+script = ExtResource("1_8lvso")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_puwpv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(15, 15)
+texture = SubResource("PlaceholderTexture2D_khkxi")
+
+[node name="SelectedOutline" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_l0o1w")
