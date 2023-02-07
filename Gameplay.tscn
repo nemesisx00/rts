@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://4k6bvhxi46iq"]
+
+[ext_resource type="Script" path="res://nodes/Gameplay.cs" id="1_tltnx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_tltnx")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "GAMEPLAY"
