@@ -25,3 +25,8 @@ unique_name_in_owner = true
 visible = false
 scale = Vector2(20, 20)
 texture = SubResource("PlaceholderTexture2D_l0o1w")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+one_shot = true
