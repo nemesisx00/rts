@@ -16,3 +16,4 @@ text = "GAMEPLAY"
 [node name="ControllableUnit" parent="." instance=ExtResource("2_c0u10")]
 position = Vector2(491, 186)
 UnitName = "Tazorface"
+MoveSpeed = 1

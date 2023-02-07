@@ -28,6 +28,9 @@ namespace Rts.Nodes
 					case MouseButton.Left:
 						processLeftClick(iemb);
 						break;
+					case MouseButton.Right:
+						processRightClick(iemb);
+						break;
 				}	
 			}
 		}
@@ -76,6 +79,14 @@ namespace Rts.Nodes
 					SelectedUnits.AddRange(units);
 					SelectedUnits.ForEach(u => u.select());
 				}
+			}
+		}
+		
+		private void processRightClick(InputEventMouseButton iemb)
+		{
+			if(!iemb.Pressed)
+			{
+				SelectedUnits.ForEach(u => u.move(iemb.Position));
 			}
 		}
 		

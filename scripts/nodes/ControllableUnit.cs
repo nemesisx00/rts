@@ -12,10 +12,26 @@ namespace Rts.Nodes
 		
 		[Export]
 		public string UnitName { get; set; }
+		[Export]
+		public int MoveSpeed { get; set; }
+		public bool Moving { get; private set; } = false;
 		
 		public bool Selected { get { return GetNode<Sprite2D>(NodePaths.SelectedOutline).Visible; } }
 		
+		private Vector2 targetPosition = Vector2.Zero;
 		private Sprite2D outline;
+		
+		public override void _Process(double delta)
+		{
+			if(Position.Equals(targetPosition))
+				Moving = false;
+			
+			if(Moving)
+			{
+				Velocity = (targetPosition - Position) * MoveSpeed;
+				MoveAndSlide();
+			}
+		}
 		
 		public override void _Ready()
 		{
@@ -25,6 +41,12 @@ namespace Rts.Nodes
 		public void deselect()
 		{
 			outline.Visible = false;
+		}
+		
+		public void move(Vector2 destination)
+		{
+			targetPosition = destination;
+			Moving = true;
 		}
 		
 		public void select()
