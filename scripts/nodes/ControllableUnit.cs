@@ -13,7 +13,7 @@ namespace Rts.Nodes
 		[Export]
 		public string UnitName { get; set; }
 		[Export]
-		public int MoveSpeed { get; set; }
+		public int MoveSpeed { get; set; } = 2;
 		public bool Moving { get; private set; } = false;
 		
 		public bool Selected { get { return GetNode<Sprite2D>(NodePaths.SelectedOutline).Visible; } }
