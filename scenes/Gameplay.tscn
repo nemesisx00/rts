@@ -11,13 +11,6 @@ script = ExtResource("1_2kuly")
 unique_name_in_owner = true
 script = ExtResource("2_dsqqt")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 485.0
-offset_top = 43.0
-offset_right = 570.0
-offset_bottom = 69.0
-text = "GAMEPLAY"
-
 [node name="ControllableUnit" parent="." instance=ExtResource("2_c0u10")]
 position = Vector2(491, 186)
 UnitName = "Tazorface"
