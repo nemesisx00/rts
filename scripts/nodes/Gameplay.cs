@@ -10,9 +10,13 @@ namespace Rts.Nodes
 		public Vector2 DragStart { get; private set; } = Vector2.Zero;
 		public List<ControllableUnit> SelectedUnits { get; set; } = new List<ControllableUnit>();
 		
+		private SelectionBox selectionBox;
+		
 		public override void _Ready()
 		{
 			refreshSelectedUnits();
+			
+			selectionBox = GetNode<SelectionBox>("%SelectionBox");
 		}
 		
 		public override void _UnhandledInput(InputEvent e)
@@ -32,6 +36,13 @@ namespace Rts.Nodes
 						processRightClick(iemb);
 						break;
 				}	
+			}
+			else if(e is InputEventMouseMotion iemm)
+			{
+				selectionBox.Active = Dragging;
+				if(Dragging)
+					selectionBox.Rectangle = new Rect2(DragStart, iemm.Position - DragStart);
+				selectionBox.QueueRedraw();
 			}
 		}
 		
@@ -93,12 +104,12 @@ namespace Rts.Nodes
 		private List<ControllableUnit> detectUnits(Vector2 start, Vector2 end)
 		{
 			var shape = PhysicsServer2D.RectangleShapeCreate();
-			var size = new Vector2(end.x - start.x, end.y - start.y);
+			var size = (end - start) / 2;
 			PhysicsServer2D.ShapeSetData(shape, size);
 			
 			var query = new PhysicsShapeQueryParameters2D();
 			query.ShapeRid = shape;
-			query.Transform = new Transform2D(0, (end + start) / 2);
+			query.Transform = new Transform2D(0, (start + end) / 2);
 			var collisions = GetWorld2d().DirectSpaceState.IntersectShape(query);
 			
 			PhysicsServer2D.FreeRid(shape);

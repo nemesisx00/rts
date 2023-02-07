@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://2ob11lmfdisb"]
+[gd_scene load_steps=4 format=3 uid="uid://2ob11lmfdisb"]
 
 [ext_resource type="Script" path="res://scripts/nodes/Gameplay.cs" id="1_2kuly"]
 [ext_resource type="PackedScene" uid="uid://7486vcv4pdwr" path="res://scenes/ControllableUnit.tscn" id="2_c0u10"]
+[ext_resource type="Script" path="res://scripts/nodes/SelectionBox.cs" id="2_dsqqt"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_2kuly")
+
+[node name="SelectionBox" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_dsqqt")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 485.0
@@ -16,3 +21,7 @@ text = "GAMEPLAY"
 [node name="ControllableUnit" parent="." instance=ExtResource("2_c0u10")]
 position = Vector2(491, 186)
 UnitName = "Tazorface"
+
+[node name="ControllableUnit2" parent="." instance=ExtResource("2_c0u10")]
+position = Vector2(783, 149)
+UnitName = "Franky"
