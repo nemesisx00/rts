@@ -22,14 +22,14 @@ namespace Rts.Nodes
 			outline = GetNode<Sprite2D>(NodePaths.SelectedOutline);
 		}
 		
-		public void select()
-		{
-			outline.Visible = true;
-		}
-		
 		public void deselect()
 		{
 			outline.Visible = false;
+		}
+		
+		public void select()
+		{
+			outline.Visible = true;
 		}
 	}
 }
