@@ -6,8 +6,8 @@ namespace Rts.Nodes.Autoload
 	{
 		public sealed class Scenes
 		{
-			public const string MainMenu = "res://MainMenu.tscn";
-			public const string Gameplay = "res://Gameplay.tscn";
+			public const string MainMenu = "res://scenes/MainMenu.tscn";
+			public const string Gameplay = "res://scenes/Gameplay.tscn";
 		}
 		
 		public const string NodePath = "/root/SceneManager";

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://caf61qelcn2s8"]
+[gd_scene load_steps=5 format=3 uid="uid://7486vcv4pdwr"]
 
-[ext_resource type="Script" path="res://nodes/ControllableUnit.cs" id="1_8lvso"]
+[ext_resource type="Script" path="res://scripts/nodes/ControllableUnit.cs" id="1_w44ah"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puwpv"]
 
@@ -9,7 +9,7 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l0o1w"]
 
 [node name="ControllableUnit" type="CharacterBody2D"]
-script = ExtResource("1_8lvso")
+script = ExtResource("1_w44ah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_puwpv")

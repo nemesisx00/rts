@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://4k6bvhxi46iq"]
+[gd_scene load_steps=3 format=3 uid="uid://2ob11lmfdisb"]
 
-[ext_resource type="Script" path="res://nodes/Gameplay.cs" id="1_tltnx"]
-[ext_resource type="PackedScene" uid="uid://caf61qelcn2s8" path="res://ControllableUnit.tscn" id="2_c0u10"]
+[ext_resource type="Script" path="res://scripts/nodes/Gameplay.cs" id="1_2kuly"]
+[ext_resource type="PackedScene" uid="uid://7486vcv4pdwr" path="res://scenes/ControllableUnit.tscn" id="2_c0u10"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_tltnx")
+script = ExtResource("1_2kuly")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 485.0
