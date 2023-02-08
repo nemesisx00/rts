@@ -1,27 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://2ob11lmfdisb"]
+[gd_scene load_steps=3 format=3 uid="uid://2ob11lmfdisb"]
 
 [ext_resource type="Script" path="res://scripts/nodes/Gameplay.cs" id="1_2kuly"]
-[ext_resource type="PackedScene" uid="uid://7486vcv4pdwr" path="res://scenes/ControllableUnit.tscn" id="2_c0u10"]
 [ext_resource type="Script" path="res://scripts/nodes/SelectionBox.cs" id="2_dsqqt"]
-[ext_resource type="Texture2D" uid="uid://d08cmsnyvfjak" path="res://assets/sprites/sword.svg" id="4_7mtjj"]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_2kuly")
 
 [node name="SelectionBox" type="Node2D" parent="."]
 unique_name_in_owner = true
+z_index = 100
 script = ExtResource("2_dsqqt")
 
-[node name="Map" type="TileMap" parent="."]
-cell_quadrant_size = 64
-format = 2
-
-[node name="ControllableUnit" parent="." instance=ExtResource("2_c0u10")]
-position = Vector2(491, 186)
-UnitName = "Tazorface"
-Sprite = ExtResource("4_7mtjj")
-
-[node name="ControllableUnit2" parent="." instance=ExtResource("2_c0u10")]
-position = Vector2(783, 149)
-UnitName = "Franky"
-Sprite = ExtResource("4_7mtjj")
+[node name="Map" type="Node2D" parent="."]
+unique_name_in_owner = true

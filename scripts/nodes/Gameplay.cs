@@ -11,12 +11,20 @@ namespace Rts.Nodes
 		public List<ControllableUnit> SelectedUnits { get; set; } = new List<ControllableUnit>();
 		
 		private SelectionBox selectionBox;
+		private Node2D map;
 		
 		public override void _Ready()
 		{
-			refreshSelectedUnits();
-			
 			selectionBox = GetNode<SelectionBox>("%SelectionBox");
+			map = GetNode<Node2D>("%Map");
+			
+			if(map.GetChildCount() < 1)
+				loadLevel(SceneManager.Scenes.Level1);
+			else
+			{
+				refreshSelectedUnits();
+				refreshLevelSignals();
+			}
 		}
 		
 		public override void _UnhandledInput(InputEvent e)
@@ -49,10 +57,71 @@ namespace Rts.Nodes
 		public void refreshSelectedUnits()
 		{
 			SelectedUnits.Clear();
-			foreach(var node in GetChildren())
+			foreach(var node in map.GetChild(0).GetChildren())
 			{
 				if(node is ControllableUnit unit && unit.Selected)
 					SelectedUnits.Add(unit);
+			}
+		}
+		
+		public void refreshLevelSignals()
+		{
+			if(map.GetChild<LevelBase>(0) is LevelBase level)
+			{
+				level.LevelCompleted += handleLevelCompleted;
+			}
+		}
+		
+		private List<ControllableUnit> detectUnits(Vector2 start, Vector2 end)
+		{
+			var shape = PhysicsServer2D.RectangleShapeCreate();
+			var size = (end - start) / 2;
+			PhysicsServer2D.ShapeSetData(shape, size);
+			
+			var query = new PhysicsShapeQueryParameters2D();
+			query.ShapeRid = shape;
+			query.Transform = new Transform2D(0, (start + end) / 2);
+			query.CollisionMask = 2;
+			var collisions = GetWorld2d().DirectSpaceState.IntersectShape(query);
+			
+			PhysicsServer2D.FreeRid(shape);
+			
+			var units = new List<ControllableUnit>();
+			foreach(var dict in collisions)
+			{
+				var collider = dict["collider"].As<ControllableUnit>();
+				if(collider is ControllableUnit unit && !units.Contains(unit))
+				{
+					units.Add(unit);
+				}
+			}
+			
+			return units;
+		}
+		
+		private void handleLevelCompleted()
+		{
+			if(map.GetChild(0) is Level1 level)
+				loadLevel(SceneManager.Scenes.Level2);
+			else
+				GetNode<SceneManager>(SceneManager.NodePath).changeScene(SceneManager.Scenes.MainMenu);
+		}
+		
+		private void loadLevel(string levelPath)
+		{
+			var resource = GD.Load<PackedScene>(levelPath);
+			if(resource is PackedScene)
+			{
+				var instance = resource.Instantiate();
+				if(instance is LevelBase level)
+				{
+					SelectedUnits.Clear();
+					foreach(var node in map.GetChildren())
+						node.QueueFree();
+					
+					level.LevelCompleted += handleLevelCompleted;
+					map.CallDeferred("add_child", level);
+				}
 			}
 		}
 		
@@ -99,32 +168,6 @@ namespace Rts.Nodes
 			{
 				SelectedUnits.ForEach(u => u.move(iemb.Position));
 			}
-		}
-		
-		private List<ControllableUnit> detectUnits(Vector2 start, Vector2 end)
-		{
-			var shape = PhysicsServer2D.RectangleShapeCreate();
-			var size = (end - start) / 2;
-			PhysicsServer2D.ShapeSetData(shape, size);
-			
-			var query = new PhysicsShapeQueryParameters2D();
-			query.ShapeRid = shape;
-			query.Transform = new Transform2D(0, (start + end) / 2);
-			var collisions = GetWorld2d().DirectSpaceState.IntersectShape(query);
-			
-			PhysicsServer2D.FreeRid(shape);
-			
-			var units = new List<ControllableUnit>();
-			foreach(var dict in collisions)
-			{
-				var collider = dict["collider"].As<ControllableUnit>();
-				if(collider is ControllableUnit unit && !units.Contains(unit))
-				{
-					units.Add(unit);
-				}
-			}
-			
-			return units;
 		}
 	}
 }

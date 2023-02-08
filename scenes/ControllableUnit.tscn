@@ -9,6 +9,9 @@
 
 [node name="ControllableUnit" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
 motion_mode = 1
 script = ExtResource("1_w44ah")
 
@@ -27,6 +30,7 @@ offset = Vector2(-32, -64)
 [node name="SelectedOutline" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 2
 texture = ExtResource("2_lc3mj")
 
 [node name="Timer" type="Timer" parent="."]

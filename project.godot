@@ -23,3 +23,8 @@ SceneManager="*res://scripts/nodes/autoload/SceneManager.cs"
 [dotnet]
 
 project/assembly_name="rts"
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Units"

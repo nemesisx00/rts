@@ -44,7 +44,6 @@ namespace Rts.Nodes
 		public override void _Ready()
 		{
 			targetPosition = Position;
-			outline = GetNode<Sprite2D>(NodePaths.SelectedOutline);
 			
 			GetNode<Sprite2D>(NodePaths.Sprite).Texture = Sprite;
 			
@@ -55,7 +54,7 @@ namespace Rts.Nodes
 		
 		public void deselect()
 		{
-			outline.Visible = false;
+			GetNode<Sprite2D>(NodePaths.SelectedOutline).Visible = false;
 		}
 		
 		private void handleTimeout()
@@ -71,7 +70,7 @@ namespace Rts.Nodes
 		
 		public void select()
 		{
-			outline.Visible = true;
+			GetNode<Sprite2D>(NodePaths.SelectedOutline).Visible = true;
 		}
 	}
 }

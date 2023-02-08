@@ -1,0 +1,49 @@
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://covp1t4th1n2i"]
+
+[ext_resource type="Texture2D" uid="uid://cnkdoaty2orfs" path="res://assets/sprites/wall.svg" id="1_lrq61"]
+[ext_resource type="Texture2D" uid="uid://cfhqbcu86wvqn" path="res://assets/sprites/floor.svg" id="2_8g30u"]
+[ext_resource type="Texture2D" uid="uid://b28tpcg8f454o" path="res://assets/sprites/goal.svg" id="3_mkqnj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_56kgd"]
+resource_name = "Wall"
+texture = ExtResource("1_lrq61")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gj03b"]
+vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+outlines = [PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cen8b"]
+resource_name = "Floor"
+texture = ExtResource("2_8g30u")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_gj03b")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c253y"]
+vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+outlines = [PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hg4cf"]
+texture = ExtResource("3_mkqnj")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_c253y")
+
+[resource]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_56kgd")
+sources/1 = SubResource("TileSetAtlasSource_cen8b")
+sources/2 = SubResource("TileSetAtlasSource_hg4cf")
