@@ -17,9 +17,11 @@ namespace Rts.Nodes
 		[Export]
 		public Texture2D Sprite { get; set; }
 		[Export(PropertyHint.Range, "0,10,or_greater")]
-		public uint MoveSpeed { get; set; } = 2;
+		public float MoveSpeed { get; set; } = 200.0f;
 		[Export]
-		public uint TargetProximity { get; set; } = 1;
+		public float PathProximity { get; set; } = 4.0f;
+		[Export]
+		public float TargetProximity { get; set; } = 4.0f;
 		[Export]
 		public uint StruggleTime { get; set; } = 5;
 		
@@ -28,12 +30,15 @@ namespace Rts.Nodes
 		private Vector2 targetPosition = Vector2.Zero;
 		private Sprite2D outline;
 		private Timer timer;
+		private NavigationAgent2D navAgent;
 		
 		public override void _PhysicsProcess(double delta)
 		{
-			if(Position.DistanceTo(targetPosition) > TargetProximity)
+			base._PhysicsProcess(delta);
+			
+			if(!navAgent.IsTargetReached())
 			{
-				Velocity = (targetPosition - Position) * MoveSpeed;
+				Velocity = (navAgent.GetNextLocation() - Position).Normalized() * MoveSpeed;
 				MoveAndSlide();
 				
 				if(timer.IsStopped() && GetSlideCollisionCount() > 0)
@@ -43,6 +48,8 @@ namespace Rts.Nodes
 		
 		public override void _Ready()
 		{
+			base._Ready();
+			
 			targetPosition = Position;
 			
 			GetNode<Sprite2D>(NodePaths.Sprite).Texture = Sprite;
@@ -50,6 +57,10 @@ namespace Rts.Nodes
 			timer = GetNode<Timer>(NodePaths.Timer);
 			timer.WaitTime = StruggleTime;
 			timer.Timeout += handleTimeout;
+			
+			navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+			navAgent.PathDesiredDistance = PathProximity;
+			navAgent.TargetDesiredDistance = TargetProximity;
 		}
 		
 		public void deselect()
@@ -60,12 +71,12 @@ namespace Rts.Nodes
 		private void handleTimeout()
 		{
 			if(GetSlideCollisionCount() > 0)
-				targetPosition = Position;
+				navAgent.TargetLocation = Position;
 		}
 		
 		public void move(Vector2 destination)
 		{
-			targetPosition = destination;
+			navAgent.TargetLocation = destination;
 		}
 		
 		public void select()
